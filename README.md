@@ -1,80 +1,84 @@
-# 🚀 Portfolio Creator Agent
+# 🤖 Portfolio Creator Agent
 
-A specialized, AI-powered pair programmer and agent designed to interview developers, designers, and tech professionals, collect their verified personal details, and generate modern, high-performance personal portfolio websites with **zero external dependencies**.
-
----
-
-## 🌟 Key Features
-
-- **🎯 Specialized Scope**: Exclusively focused on personal portfolio creation. Automatically declines and redirects off-topic queries.
-- **🛡️ Zero Hallucination Guarantee**: Strictly uses verified information provided by the user. No fabricated fake projects or dummy work experience.
-- **💾 JSON-Driven Pipeline**: Gathers requirements systematically into a clean `data/portfolio-data.json` structure before generating code.
-- **💎 Premium Design & Aesthetics**:
-  - Dark mode by default with light mode toggle.
-  - Smooth glassmorphism (`backdrop-filter`), ambient glows, and card hover micro-interactions.
-  - Modern typography powered by Google Fonts (*Outfit* and *Inter*).
-  - 100% mobile-friendly responsive layout.
-- **⚡ Pure Vanilla Web Stack**: Fast and lightweight HTML5, modern CSS3 (custom properties/tokens), and ES6+ JavaScript.
+A highly specialized AI Agent repository for Antigravity IDE and modern agent workflows. This agent interviews engineers and designers, gathers validated background data, and generates aesthetic, production-ready personal portfolio websites.
 
 ---
 
-## 📁 Project Structure
+## 🎯 Agent Purpose & Scope
+
+- **Exclusivity**: Dedicated solely to personal developer/designer portfolio generation and design consulting.
+- **Strict Guardrails**: Automatically rejects any unrelated requests (e.g., math, trivia, general backend services, chit-chat) and guides the user back to portfolio building.
+- **Data Integrity**: Zero hallucination policy. Never invents fake projects, employment history, or dummy tech stacks. Missing details are explicitly queried from the user.
+
+---
+
+## 📁 Repository Architecture
+
+This repository contains only agent definition, rules, and skills:
 
 ```text
 portfolio_creator_agent/
 │
-├── AGENTS.md                  # Core guidelines, rules, and scope boundaries for the agent
-├── README.md                  # Project overview and documentation
+├── AGENTS.md                  # Core rules, behavioral constraints & off-topic guards
+├── README.md                  # Agent repository documentation & overview
 │
-├── .agents/
-│   └── skills/
-│       ├── get-info/          # Skill: Interactive user interview & JSON data generation
-│       │   └── SKILL.md
-│       └── build-portfolio/   # Skill: Architecture, CSS system & portfolio site generation
-│           └── SKILL.md
-│
-├── data/
-│   └── portfolio-data.json    # Real user details (identity, skills, projects, contact)
-│
-├── css/
-│   └── style.css              # Design tokens, themes, layout & animations
-│
-├── js/
-│   └── main.js                # Theme switcher (dark/light) & smooth navigation
-│
-└── index.html                 # Semantic HTML5 portfolio landing page
+└── .agents/
+    └── skills/
+        ├── get-info/          # Skill: Interactive requirement gathering & JSON schema export
+        │   └── SKILL.md
+        │
+        └── build-portfolio/   # Skill: Modern portfolio architecture & web generation playbook
+            └── SKILL.md
 ```
 
 ---
 
-## 🔄 How It Works (Pipeline)
+## ⚡ Skills Breakdown
 
-1. **Step 1 — Interview & Requirement Gathering (`skills/get-info`)**:
-   The agent collects the user's name, professional role, skills, real projects, and contact info, then saves it to `data/portfolio-data.json`.
-2. **Step 2 — Building the Portfolio (`skills/build-portfolio`)**:
-   The agent reads `data/portfolio-data.json` and crafts:
-   - `index.html`: Semantic markup with SEO and Open Graph metadata.
-   - `css/style.css`: Clean design system with CSS custom properties.
-   - `js/main.js`: Dark/Light theme toggle and smooth scrolling.
-3. **Step 3 — Preview & Deployment**:
-   Open `index.html` directly in any web browser or deploy to GitHub Pages, Vercel, or Netlify with zero build step required.
+### 1. `get-info` ([`.agents/skills/get-info/SKILL.md`](.agents/skills/get-info/SKILL.md))
+- **Role**: Conducts a structured, bite-sized interview to capture:
+  - Personal identity (Name, title, bio, location, contact details).
+  - Tech stack (Languages, frameworks, tools).
+  - Verified projects (Title, description, stack, GitHub/Demo URLs).
+  - Aesthetic preferences (Dark/Light mode, accent color, typography).
+- **Artifact Output**: Saves collected structured data to `data/portfolio-data.json`.
+
+### 2. `build-portfolio` ([`.agents/skills/build-portfolio/SKILL.md`](.agents/skills/build-portfolio/SKILL.md))
+- **Role**: Reads `data/portfolio-data.json` and crafts the complete personal website:
+  - **Structure**: Semantic HTML5 (`index.html`) with proper SEO and Open Graph metadata.
+  - **Styling**: Modern CSS3 (`css/style.css`) utilizing design tokens, glassmorphism, responsive grid/flexbox, and Google Fonts.
+  - **Interactivity**: Clean ES6+ JavaScript (`js/main.js`) featuring Dark/Light mode toggle, smooth scrolling, and responsive menu logic.
+  - **Zero Bloat**: Generates pure vanilla code with no unnecessary third-party runtime dependencies.
 
 ---
 
-## 🚀 Quick Start / Local Preview
+## 🔄 Execution Pipeline
 
-No package managers or build tools required!
-
-Simply open `index.html` in your favorite browser:
-
-```bash
-# Example with python's built-in HTTP server:
-python3 -m http.server 3000
+```text
+User Request
+     │
+     ▼
+[ AGENTS.md Rules Check ] ──(Off-topic query)──► Polite Rejection & Redirect
+     │ (Portfolio query)
+     ▼
+[ 1. get-info skill ]
+     │
+     ▼
+Produces: data/portfolio-data.json (Real data only)
+     │
+     ▼
+[ 2. build-portfolio skill ]
+     │
+     ▼
+Generates: index.html + css/style.css + js/main.js
 ```
 
-Then visit `http://localhost:3000` in your browser.
-
 ---
 
-## 📄 License
-MIT License. Feel free to use and customize for your own personal portfolio!
+## 🛠 Usage in Antigravity IDE
+
+1. Open this repository in Antigravity IDE.
+2. The agent automatically discovers rules from `AGENTS.md` and skills from `.agents/skills/`.
+3. Simply start a chat by greeting the agent or saying:
+   > *"Menga portfolio sayt yaratishda yordam ber"*
+4. The agent will guide you through the `get-info` interview and generate your customized website.
